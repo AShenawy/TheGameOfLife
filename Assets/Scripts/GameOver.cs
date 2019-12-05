@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    // When game objects tagged with "balance", this script will let the Game Manager script know it's game over.
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.CompareTag("Balance"))
+            GameManager.gm.EndGame();
     }
 }
