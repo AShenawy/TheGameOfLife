@@ -9,7 +9,6 @@ public class Card : MonoBehaviour
     // 
 
     public string dialogue;
-    public SpriteRenderer cardImage;
     public int score;
     public WeightTypes weight;
     public CardType cardType;
@@ -31,12 +30,11 @@ public class Card : MonoBehaviour
         }
     }
 
-    public void SetCardDetails(string text, SpriteRenderer image,int skor)
-    {
-        dialogue = text;
-        cardImage = image;
-        score = skor;
-    }
+    //public void SetCardDetails(string text,int _score)
+    //{
+    //    dialogue = text;
+    //    score = _score;
+    //}
 
     //public void ChangeCard()
     //{
