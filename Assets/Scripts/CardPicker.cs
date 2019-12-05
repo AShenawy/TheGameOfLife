@@ -10,7 +10,7 @@ public class CardPicker : MonoBehaviour
     // When first list is empty, switch lists
 
     public List<GameObject> CardList;
-    public List<GameObject> UsedCards;
+    //public List<GameObject> UsedCards;
     public GameObject ActiveCard;
     public GameObject PickedCard;
     public GameObject CardSpawner;
