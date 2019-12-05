@@ -3329,6 +3329,28 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4381797120805162674}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4381797120805162676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4381797120022691743, guid: 4335b20209ea4a34b8926a4fb968eca9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4381797120805162674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4381797120805162677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381797120805162676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ad367cce408e7479937ddaabd0d337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: 
+  score: 0
+  weight: 0
+  cardType: 0
 --- !u!1001 &5682234192674040222
 PrefabInstance:
   m_ObjectHideFlags: 0
