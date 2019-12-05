@@ -11,26 +11,25 @@ public class Card : MonoBehaviour
     public string dialogue;
     public SpriteRenderer cardImage;
     public int score;
-    public GameObject cardPicker;
+    public WeightTypes weight;
+    public CardType cardType;
 
-    //public WeightTypes weight;
-
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //    if (weight  == small)
-    //    {
-    //        score = 100;
-    //    }
-    //    else if (weight == medium)
-    //    {
-    //        score = 200;
-    //    }
-    //    else if (weight == large)
-    //    {
-    //        score = 300;
-    //    }
-    //}
+    //Start is called before the first frame update
+    void Start()
+    {
+        if (weight == WeightTypes.Light)
+        {
+            score = 100;
+        }
+        else if (weight == WeightTypes.Medium)
+        {
+            score = 200;
+        }
+        else if (weight == WeightTypes.Heavy)
+        {
+            score = 300;
+        }
+    }
 
     public void SetCardDetails(string text, SpriteRenderer image,int skor)
     {
@@ -38,13 +37,18 @@ public class Card : MonoBehaviour
         cardImage = image;
         score = skor;
     }
+
     //public void ChangeCard()
     //{
     //    if (cardPicker.GetComponent<CardPicker>().ActiveCard.)
     //    {
     //Card pickerdeki last card'ı bulup karsılastır. Aynı degilse(degismisse) yenisinin detaylarını ekle.
+
+    //  THIS IS IF IT DOESN'T WORK ON FIRST START
+
     //    }
     //}
 }
 
 public enum WeightTypes { Light, Medium, Heavy}
+public enum CardType { Life, Work}
