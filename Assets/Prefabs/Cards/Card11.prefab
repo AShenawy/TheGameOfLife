@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ad367cce408e7479937ddaabd0d337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: "t\u2019s Black Friday! Pretend to be sick and go get those juicy bargains? "
+  dialogue: "It\u2019s Black Friday! Pretend to be sick and go get those juicy bargains? "
   score: 111
   weight: 1
   cardType: 0

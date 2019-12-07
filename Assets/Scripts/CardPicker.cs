@@ -9,48 +9,48 @@ public class CardPicker : MonoBehaviour
     // first list, spawn it in the game screen and store it in second list.
     // When first list is empty, switch lists
 
-    public List<GameObject> CardList;
-    public GameObject ActiveCard;
-    public GameObject PickedCard;
-    public GameObject CardSpawner;
+    public List<GameObject> cardList;
+    public GameObject cardSpawner;
     public Text textArea;
-    public List<GameObject> ActiveList;
+    public List<GameObject> activeList;
 
+    private GameObject activeCard;
+    private GameObject pickedCard;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var item in CardList)
+        foreach (var item in cardList)
         {
-            ActiveList.Add(item);
+            activeList.Add(item);
         }
-        ChooseCard();
 
+        ChooseCard();
     }
     
     public void ChooseCard()
     {
-        if (ActiveList.Count >0)
+        if (activeList.Count >0)
         {
-            if (ActiveCard != null)
+            // If there's already a card displayed on screen, destroy it
+            if (activeCard != null)
             {
-                Destroy(ActiveCard.gameObject);
+                Destroy(activeCard.gameObject);
             }
-            PickedCard = ActiveList[Random.Range(0, ActiveList.Count)]; // Choose random from list.,
-            ActiveCard = Instantiate(PickedCard, CardSpawner.transform);
-            
-            textArea.text = PickedCard.GetComponent<Card>().dialogue;
-            ActiveList.Remove(PickedCard);
-            if ( ActiveList.Count == 0)
+
+            // Pick a new card from the active list of cards
+            pickedCard = activeList[Random.Range(0, activeList.Count)];
+            activeCard = Instantiate(pickedCard, cardSpawner.transform);
+
+            textArea.text = pickedCard.GetComponent<Card>().dialogue;
+            activeList.Remove(pickedCard);
+            if ( activeList.Count == 0)
             {
-                foreach (var item in CardList)
+                foreach (var item in cardList)
                 {
-                    ActiveList.Add(item);
+                    activeList.Add(item);
                 }
             }
-
         }
-
-
     }
 }
