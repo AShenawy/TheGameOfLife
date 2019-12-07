@@ -8,10 +8,10 @@ public class SpawnWeight : MonoBehaviour
 
     public GameObject weight;
     public GameObject spawner;
-    public float minX;
-    public float maxX;
+    public float minX = -0.5f;
+    public float maxX = 0.5f;
 
-    public void SpawnObject()
+    public void SpawnObject(GameObject weight, GameObject spawner)
     {
         float randomX = Random.Range(minX, maxX);
         float spawnerX = spawner.transform.position.x + randomX;
