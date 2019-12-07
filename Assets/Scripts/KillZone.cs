@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script will destroy any game object tagged with "weight" that touches the Kill Collider.
+
 public class KillZone : MonoBehaviour
 {
-    // This script will destroy any game object tagged with "weight" that touches the Kill Collider.
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(collision.CompareTag("Weight") || collision.CompareTag("Balance"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
