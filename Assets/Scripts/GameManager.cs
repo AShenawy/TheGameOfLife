@@ -7,31 +7,46 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    //Game manager have a control of the entire game and its behaviour, manging the card and the score.
+    //Disable buttons interactable functionality,spawning card weights, changing the bodyType of the BalanceBody.
+
     public static GameManager gm;
-
     private int score = 0;
-    //private int scoreToAdd = 100;
-    public GameObject cardSpawner;
 
+    //Caching
     CardPicker cardPicker;
     SpawnWeight weightSpawner;
 
-    public GameObject lifeWeightSpawner;
-    public GameObject workWeightSpawner;
-
+    //Card info
     private CardType cardType;
     private WeightTypes cardWeight;
     private Card CardData;
 
-    public GameObject lightWeight;
-    public GameObject mediumWeight;
-    public GameObject heavyWeight;
+    private int clickCounter;
+    private bool isKinamatic;
+
+    [Header("BodyBalance")]
+    [SerializeField] private GameObject balanceBody;
+
+    [Header("Spawners")]
+    [SerializeField] private GameObject cardSpawner;
+    [SerializeField] private GameObject lifeWeightSpawner;
+    [SerializeField] private GameObject workWeightSpawner;
+
+    [Header("Card Weights")]
+    [SerializeField] private GameObject lightWeight;
+    [SerializeField] private GameObject mediumWeight;
+    [SerializeField] private GameObject heavyWeight;
+
+    [Header("Game Buttons")]
+    [SerializeField] private Button yesButton;
+    [SerializeField] private Button noButton;
 
     private void Awake()
     {
         KeepScore();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         if (gm == null)
@@ -47,28 +62,72 @@ public class GameManager : MonoBehaviour
             weightSpawner = FindObjectOfType<SpawnWeight>();
         }
 
-        cardPicker.ChooseCard();
+        balanceBody.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
+        cardPicker.ChooseCard();
     }
 
+
+    public void onClickYesButton()
+    {
+        clickCounter++;
+
+        MakeBalanceBarDynamic();
+
+        GetCardData();
+
+        if (cardType == CardType.Life)
+        { 
+            weightSpawner.SpawnObject(SelectCardWeight(), lifeWeightSpawner);
+        }
+        else
+        {
+            weightSpawner.SpawnObject(SelectCardWeight(), workWeightSpawner);
+        }
+    }
+
+
+    public void onClickNoButton()
+    {
+        clickCounter++;
+
+        MakeBalanceBarDynamic();
+
+        GetCardData();
+
+        if (cardType == CardType.Work)
+        {
+            weightSpawner.SpawnObject(SelectCardWeight(), lifeWeightSpawner);
+        }
+        else
+        {
+            weightSpawner.SpawnObject(SelectCardWeight(), workWeightSpawner);
+        }
+    }
+
+    //gets current card data after clicking Yes/no buttons
     public void GetCardData()
     {
-       CardData =cardSpawner.GetComponentInChildren<Card>();
+        CardData = cardSpawner.GetComponentInChildren<Card>();
         cardWeight = CardData.weight;
         cardType = CardData.cardType;
 
         int cardscore = CardData.score;
         score += cardscore;
-        
+
+        yesButton.GetComponent<Button>().interactable = false;
+        noButton.GetComponent<Button>().interactable = false;
+
         Invoke("DelayChossingCard", 1f);
     }
 
-    private GameObject SelectWeight()
+    private GameObject SelectCardWeight()
     {
-        if(cardWeight == WeightTypes.Light)
+        if (cardWeight == WeightTypes.Light)
         {
             return lightWeight;
-        } else if( cardWeight == WeightTypes.Medium)
+        }
+        else if (cardWeight == WeightTypes.Medium)
         {
             return mediumWeight;
         }
@@ -78,51 +137,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void onClickYesButton()
+    //Needed when clickCounter = 2
+    private void MakeBalanceBarDynamic()
     {
-        GetCardData();
-
-        if (cardType == CardType.Life)
-        { 
-            weightSpawner.SpawnObject(SelectWeight(), lifeWeightSpawner);
-        }
-        else
+        if (clickCounter == 2 && isKinamatic)
         {
-            weightSpawner.SpawnObject(SelectWeight(), workWeightSpawner);
+            balanceBody.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            isKinamatic = false;
         }
-    }
-
-
-    public void onClickNoButton()
-    {
-        GetCardData();
-
-        if (cardType == CardType.Work)
-        {
-            weightSpawner.SpawnObject(SelectWeight(), lifeWeightSpawner);
-        }
-        else
-        {
-            weightSpawner.SpawnObject(SelectWeight(), workWeightSpawner);
-        }
-
     }
 
     private void DelayChossingCard()
     {
         cardPicker.ChooseCard();
+
+        //enable buttons functionality
+        yesButton.GetComponent<Button>().interactable = true;
+        noButton.GetComponent<Button>().interactable = true;
     }
 
+    //Keep a hold of the current score in case of GameOver
     private void KeepScore()
     {
         DontDestroyOnLoad(gameObject);
     }
-
-    //public void AddToScore()
-    //{
-    //    score += scoreToAdd;
-    //    //scoreText.text = score.ToString();
-    //}
 
     public int GetScore()
     {
@@ -134,10 +172,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
+    //should be called on MainMenu scene to destroy the current GameManager and resets the game
     public void ResetGame()
     {
         Destroy(gameObject);
     }
-
 
 }
