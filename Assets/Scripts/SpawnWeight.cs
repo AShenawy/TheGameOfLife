@@ -6,10 +6,12 @@ public class SpawnWeight : MonoBehaviour
 {
     // This script spawns a weight game object with random X value.
 
-    public GameObject weight;
-    public GameObject spawner;
+    
     public float minX = -0.5f;
     public float maxX = 0.5f;
+
+    private GameObject weight;
+    private GameObject spawner;
 
     public void SpawnObject(GameObject weight, GameObject spawner)
     {

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private Card CardData;
 
     private int clickCounter;
-    private bool isKinamatic;
+    private bool isKinamatic = true;
 
     [Header("BodyBalance")]
     [SerializeField] private GameObject balanceBody;

@@ -97,4 +97,4 @@ MonoBehaviour:
     on the same day. Will you go to university?
   score: 111
   weight: 2
-  cardType: 0
+  cardType: 1

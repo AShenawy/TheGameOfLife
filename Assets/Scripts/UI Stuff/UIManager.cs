@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,23 +9,37 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        pausePanel.SetActive(false);
+        if (pausePanel)
+        {
+            pausePanel.SetActive(false);
+        }
     }
 
     public void PauseGame()
     {
-        pausePanel.SetActive(true);
-        Time.timeScale = 0;
+        if (pausePanel)
+        {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     public void ResumeGame()
     {
-        pausePanel.SetActive(false);
-        Time.timeScale = 1;
+        if (pausePanel)
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void GoToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
