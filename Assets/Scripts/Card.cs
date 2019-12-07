@@ -9,9 +9,10 @@ public class Card : MonoBehaviour
     // 
 
     public string dialogue;
-    public int score;
     public WeightTypes weight;
     public CardType cardType;
+
+    [HideInInspector]public int score;
 
     //Start is called before the first frame update
     void Start()

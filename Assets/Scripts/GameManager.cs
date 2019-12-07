@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        SceneManager.LoadScene("GameOver");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
 
     //should be called on MainMenu scene to destroy the current GameManager and resets the game

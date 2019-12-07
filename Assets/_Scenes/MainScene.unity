@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 539348312}
   - component: {fileID: 539348311}
   m_Layer: 0
-  m_Name: UI Manager
+  m_Name: Scene Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 664479712}
   - component: {fileID: 664479711}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Prototype
+          m_StringArgument: GameScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &664479712
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 2017495098}
   - component: {fileID: 2017495097}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

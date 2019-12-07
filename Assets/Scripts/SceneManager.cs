@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
     public GameObject pausePanel;
 
@@ -40,6 +40,6 @@ public class UIManager : MonoBehaviour
 
     public void GoToScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }

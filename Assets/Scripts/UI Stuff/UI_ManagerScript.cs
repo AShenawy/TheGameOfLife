@@ -20,7 +20,7 @@ public class UI_ManagerScript : MonoBehaviour
 
     public void NavigateTo(int scene)
     {
-        SceneManager.LoadScene(scene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 
     public void ExitGame()
