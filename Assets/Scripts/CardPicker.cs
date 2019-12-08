@@ -7,7 +7,6 @@ using UnityEngine.UI;
     // it so it isn't picked twice. Once all cards are picked the active list will be refilled from the cardlist
 public class CardPicker : MonoBehaviour
 {
-
     public List<GameObject> cardList;
     public GameObject cardSpawner;
     public Text textArea;
@@ -20,6 +19,8 @@ public class CardPicker : MonoBehaviour
     void Start()
     {
         FillActiveList();
+
+        ChooseCard();
     }
     
     public void ChooseCard()
