@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+    // This script contains the information related to each card game object.
 public class Card : MonoBehaviour
 {
-    // This script will contain the dialogue (string) and image (SpriteRenderer) for the card game object.
-    // It will also contain what weight game object and score.
-    // 
-
+    [TextArea]
     public string dialogue;
     public WeightTypes weight;
     public CardType cardType;
 
-    [HideInInspector]public int score;
+    [HideInInspector]
+    public int score;
 
-    //Start is called before the first frame update
     void Start()
     {
+        // Set score for each weight type
         if (weight == WeightTypes.Light)
         {
             score = 100;
@@ -30,7 +29,6 @@ public class Card : MonoBehaviour
             score = 300;
         }
     }
-
 }
 
 public enum WeightTypes { Light, Medium, Heavy}

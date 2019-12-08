@@ -5,25 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
+    //Game manager have a control of the entire game and its behaviour, managing the card and the score.
+    //Disable buttons interactable functionality,spawning card weights, changing the bodyType of the BalanceBody.
 public class GameManager : MonoBehaviour
 {
-    //Game manager have a control of the entire game and its behaviour, manging the card and the score.
-    //Disable buttons interactable functionality,spawning card weights, changing the bodyType of the BalanceBody.
-
+    // Make a copy of GameManager to be accessible by other scripts
     public static GameManager gm;
-    private int score = 0;
-
-    //Caching
-    CardPicker cardPicker;
-    SpawnWeight weightSpawner;
-
-    //Card info
-    private CardType cardType;
-    private WeightTypes cardWeight;
-    private Card CardData;
-
-    private int clickCounter;
-    private bool isKinamatic = true;
 
     [Header("BodyBalance")]
     [SerializeField] private GameObject balanceBody;
@@ -41,6 +28,21 @@ public class GameManager : MonoBehaviour
     [Header("Game Buttons")]
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
+
+
+    //Caching
+    private CardPicker cardPicker;
+    private SpawnWeight weightSpawner;
+
+    //Card info
+    private CardType cardType;
+    private WeightTypes cardWeight;
+    private Card cardData;
+
+    private int score = 0;
+    private int clickCounter;
+    private bool isKinematic = true;
+
 
     private void Awake()
     {
@@ -62,6 +64,9 @@ public class GameManager : MonoBehaviour
             weightSpawner = FindObjectOfType<SpawnWeight>();
         }
 
+        score = 0;
+
+        // Freeze the balance bar at first try so the game isn't lost
         balanceBody.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
         cardPicker.ChooseCard();
@@ -108,17 +113,19 @@ public class GameManager : MonoBehaviour
     //gets current card data after clicking Yes/no buttons
     public void GetCardData()
     {
-        CardData = cardSpawner.GetComponentInChildren<Card>();
-        cardWeight = CardData.weight;
-        cardType = CardData.cardType;
+        cardData = cardSpawner.GetComponentInChildren<Card>();
+        cardWeight = cardData.weight;
+        cardType = cardData.cardType;
 
-        int cardscore = CardData.score;
+        int cardscore = cardData.score;
         score += cardscore;
 
         yesButton.GetComponent<Button>().interactable = false;
         noButton.GetComponent<Button>().interactable = false;
 
-        Invoke("DelayChossingCard", 1f);
+        // The next card is delayed by 1 second to allow time for the weight to drop and the player to notice the card
+        // is changed. Also the yes/no buttons will be inactive during this time to prevent spamming
+        Invoke("DelayChoosingCard", 1f);
     }
 
     private GameObject SelectCardWeight()
@@ -140,14 +147,14 @@ public class GameManager : MonoBehaviour
     //Needed when clickCounter = 2
     private void MakeBalanceBarDynamic()
     {
-        if (clickCounter == 2 && isKinamatic)
+        if (clickCounter == 2 && isKinematic)
         {
             balanceBody.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            isKinamatic = false;
+            isKinematic = false;
         }
     }
 
-    private void DelayChossingCard()
+    private void DelayChoosingCard()
     {
         cardPicker.ChooseCard();
 

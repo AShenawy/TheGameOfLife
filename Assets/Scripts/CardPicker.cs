@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+    // This script creates 2 lists for the cards. It picks a random card from the active list and then removes
+    // it so it isn't picked twice. Once all cards are picked the active list will be refilled from the cardlist
 public class CardPicker : MonoBehaviour
 {
-    // This script will have 2 lists for the cards. It will pick a random card from
-    // first list, spawn it in the game screen and store it in second list.
-    // When first list is empty, switch lists
 
     public List<GameObject> cardList;
     public GameObject cardSpawner;
@@ -20,17 +19,12 @@ public class CardPicker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var item in cardList)
-        {
-            activeList.Add(item);
-        }
-
-        ChooseCard();
+        FillActiveList();
     }
     
     public void ChooseCard()
     {
-        if (activeList.Count >0)
+        if (activeList.Count > 0)
         {
             // If there's already a card displayed on screen, destroy it
             if (activeCard != null)
@@ -44,13 +38,20 @@ public class CardPicker : MonoBehaviour
 
             textArea.text = pickedCard.GetComponent<Card>().dialogue;
             activeList.Remove(pickedCard);
-            if ( activeList.Count == 0)
+
+            if (activeList.Count <= 0)
             {
-                foreach (var item in cardList)
-                {
-                    activeList.Add(item);
-                }
+                FillActiveList(); // active list is empty and needs to be refilled
             }
+        }
+    }
+
+    void FillActiveList()
+    {
+        // Fill the active list with cards in the card list
+        foreach (var item in cardList)
+        {
+            activeList.Add(item);
         }
     }
 }
