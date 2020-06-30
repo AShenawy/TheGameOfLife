@@ -15,7 +15,7 @@
   - Web player
 
  ### Software used to make this game
-  - Unity 2019.2
+  - Unity 2019.4
   - Adobe Photoshop CC
   - Adobe Illustrator CC
   - Visual Studio 2019 - Community Edition
